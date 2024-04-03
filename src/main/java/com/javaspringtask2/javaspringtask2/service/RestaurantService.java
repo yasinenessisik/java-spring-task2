@@ -1,5 +1,6 @@
 package com.javaspringtask2.javaspringtask2.service;
 
+import com.javaspringtask2.javaspringtask2.dto.ReservationDto;
 import com.javaspringtask2.javaspringtask2.dto.RestaurantDto;
 import com.javaspringtask2.javaspringtask2.dto.converter.RestaurantDtoConverter;
 import com.javaspringtask2.javaspringtask2.model.Restaurant;
@@ -29,4 +30,6 @@ public class RestaurantService {
     public RestaurantDto getRestaurant(String id) {
         return restaurantDtoConverter.convert(findRestaurants(id));
     }
+
+
 }

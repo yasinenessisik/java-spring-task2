@@ -20,7 +20,7 @@ public class StartupConfig implements CommandLineRunner {
         Restaurant restaurant1 = new Restaurant();
         restaurant1.setRestaurantId(1);
         restaurant1.setCity("Konya");
-        restaurant1.setState("Konya");
+        restaurant1.setState("Merkez");
         restaurant1.setAltitude(37.8716); // Konya'nın enlem bilgisi
         restaurant1.setLongitude(32.4860); // Konya'nın boylam bilgisi
         restaurant1.setRestaurantType(RestaurantType.DONER);
@@ -30,7 +30,7 @@ public class StartupConfig implements CommandLineRunner {
         Restaurant restaurant2 = new Restaurant();
         restaurant2.setRestaurantId(2);
         restaurant2.setCity("Istanbul");
-        restaurant2.setState("Istanbul");
+        restaurant2.setState("Kartal");
         restaurant2.setAltitude(40.8932); // İstanbul Kartal'ın enlem bilgisi
         restaurant2.setLongitude(29.2163); // İstanbul Kartal'ın boylam bilgisi
         restaurant2.setRestaurantType(RestaurantType.KOFTE);

@@ -2,61 +2,65 @@ package com.javaspringtask2.javaspringtask2.service;
 
 import com.javaspringtask2.javaspringtask2.dto.ReservationDto;
 import com.javaspringtask2.javaspringtask2.dto.ReservationRequest;
+import com.javaspringtask2.javaspringtask2.dto.converter.ReservationDtoConverter;
 import com.javaspringtask2.javaspringtask2.model.Customer;
-import com.javaspringtask2.javaspringtask2.model.Desk;
 import com.javaspringtask2.javaspringtask2.model.Reservation;
 import com.javaspringtask2.javaspringtask2.model.Restaurant;
-import com.javaspringtask2.javaspringtask2.repository.CustomerRepository;
 import com.javaspringtask2.javaspringtask2.repository.ReservationRepository;
-import com.javaspringtask2.javaspringtask2.repository.RestaurantRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.Optional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationService {
     private final ReservationRepository reservationRepository;
-    private final CustomerRepository customerRepository;
-    private final RestaurantRepository restaurantRepository;
+    private final RestaurantService restaurantService;
+    private final CustomerService customerService;
+    private final ReservationDtoConverter reservationDtoConverter;
 
-    public ReservationService(ReservationRepository reservationRepository, CustomerRepository customerRepository, RestaurantRepository restaurantRepository) {
+
+    public ReservationService(ReservationRepository reservationRepository, RestaurantService restaurantService, CustomerService customerService, ReservationDtoConverter reservationDtoConverter) {
         this.reservationRepository = reservationRepository;
-        this.customerRepository = customerRepository;
-        this.restaurantRepository = restaurantRepository;
+        this.restaurantService = restaurantService;
+        this.customerService = customerService;
+        this.reservationDtoConverter = reservationDtoConverter;
     }
 
-    public Customer reserve(ReservationRequest from){
-        Customer customer = new Customer();
-        customer.setCustomerId("1");
-        customer.setName("John");
-        customer.setSurname("Doe");
-        customer.setPhoneNumber("123-456-7890");
-        Restaurant restaurant = restaurantRepository.findById("1")
-                .orElseThrow(() -> new IllegalArgumentException("Restaurant with id 1 not found"));
 
-        // Desk oluştur
-        // Reservation oluştur
-        Reservation reservation = new Reservation(
-                "abc123", // reservationId
-                "Table for four", // reservationDescription
-                "2024-04-03", // rezervationDate
-                "4", // reservationNumberOfPeople
+    public ReservationDto reserve(ReservationRequest from) {
+
+        Customer customer = new Customer();
+        customer.setName(from.getName());
+        customer.setSurname(from.getSurname());
+        customer.setPhoneNumber(from.getPhoneNumber());
+        customer.isConfirm(from.isConfirm());
+        customer.isKvkk(from.isKvkk());
+
+        Customer newCustomer = customerService.saveCustomer(customer);
+        Restaurant restaurant = restaurantService.findRestaurants(from.getRestaurantId());
+        System.out.println(customer.toString());
+        System.out.println(newCustomer.toString());
+        Reservation reservation = new Reservation(// reservationId
+                from.getReservationDescription(), // reservationDescription
+                from.getRezervationDate(), // rezervationDate
+                from.getReservationNumberOfPeople(), // reservationNumberOfPeople
                 restaurant, // restaurant
-                customer, // customer
+                newCustomer, // customer
                 new HashSet<>() // desks
         );
 
-        // Oluşturulan Reservation nesnesini kullanabiliriz
-        System.out.println("Reservation Id: " + reservation.getReservationId());
-        System.out.println("Description: " + reservation.getReservationDescription());
-        System.out.println("Date: " + reservation.getRezervationDate());
-        System.out.println("Number of People: " + reservation.getReservationNumberOfPeople());
-        System.out.println("Restaurant: " + reservation.getRestaurant().getRestaurantId());
-        System.out.println("Customer: " + reservation.getCustomer().toString());
-        System.out.println("Desks: ");
+        Reservation reservation1 = reservationRepository.save(reservation);
+        return reservationDtoConverter.conver(reservation1);
+    }
 
-        return customer;
+    public List<ReservationDto> getAllReservartions() {
+        return reservationRepository.findAll().stream().map(reservation -> reservationDtoConverter.conver(reservation)).collect(Collectors.toList());
+    }
+
+    public List<ReservationDto> getReservationByRestaurant(String id) {
+        return reservationRepository.getReservationByReservationId(id).stream().map(reservation -> reservationDtoConverter.conver(reservation)).collect(Collectors.toList());
     }
 
 }

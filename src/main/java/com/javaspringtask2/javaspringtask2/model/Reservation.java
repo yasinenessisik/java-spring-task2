@@ -41,4 +41,17 @@ public class Reservation {
         this.customer = customer;
         this.desks = desks;
     }
+
+    public Reservation(String reservationDescription, String rezervationDate, String reservationNumberOfPeople, Restaurant restaurant, Customer customer, Set<Desk> desks) {
+        this.reservationDescription = reservationDescription;
+        this.rezervationDate = rezervationDate;
+        this.reservationNumberOfPeople = reservationNumberOfPeople;
+        this.restaurant = restaurant;
+        this.customer = customer;
+        this.desks = desks;
+    }
+
+    public Reservation() {
+
+    }
 }

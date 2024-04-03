@@ -78,16 +78,16 @@ public class Customer {
         this.secondPhoneNumber = secondPhoneNumber;
     }
 
-    public boolean isKvkk() {
-        return kvkk;
+    public boolean isKvkk(boolean kvkk) {
+        return this.kvkk;
     }
 
     public void setKvkk(boolean kvkk) {
         this.kvkk = kvkk;
     }
 
-    public boolean isConfirm() {
-        return confirm;
+    public boolean isConfirm(boolean confirm) {
+        return this.confirm;
     }
 
     public void setConfirm(boolean confirm) {

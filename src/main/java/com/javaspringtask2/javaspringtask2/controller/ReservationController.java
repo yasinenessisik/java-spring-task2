@@ -5,10 +5,9 @@ import com.javaspringtask2.javaspringtask2.dto.ReservationRequest;
 import com.javaspringtask2.javaspringtask2.model.Customer;
 import com.javaspringtask2.javaspringtask2.service.ReservationService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/reservation")
@@ -20,8 +19,16 @@ public class ReservationController {
     }
 
     @PostMapping("/reserve")
-    public ResponseEntity<Customer> reserve(@RequestBody ReservationRequest reservationRequest){
+    public ResponseEntity<ReservationDto> reserve(@RequestBody ReservationRequest reservationRequest){
         return ResponseEntity.ok(reservationService.reserve(reservationRequest));
+    }
+    @GetMapping
+    public ResponseEntity<List<ReservationDto>> getAllReservations(){
+        return ResponseEntity.ok(reservationService.getAllReservartions());
+    }
+    @GetMapping("/revervations/{id}")
+    public ResponseEntity<List<ReservationDto>> getAllReservations(@PathVariable String id){
+        return ResponseEntity.ok(reservationService.getReservationByRestaurant(id));
     }
 
 }
