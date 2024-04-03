@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
 
@@ -18,8 +20,8 @@ public class Reservation {
     private String reservationId;
 
     private String reservationDescription;
-    private String rezervationDate;
-    private String reservationNumberOfPeople;
+    private LocalDate rezervationDate;
+    private int reservationNumberOfPeople;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "restaurantId")
@@ -32,7 +34,7 @@ public class Reservation {
     @OneToMany(mappedBy = "reservation",fetch = FetchType.LAZY)
     private Set<Desk> desks;
 
-    public Reservation(String reservationId, String reservationDescription, String rezervationDate, String reservationNumberOfPeople, Restaurant restaurant, Customer customer, Set<Desk> desks) {
+    public Reservation(String reservationId, String reservationDescription, LocalDate rezervationDate, int reservationNumberOfPeople, Restaurant restaurant, Customer customer, Set<Desk> desks) {
         this.reservationId = reservationId;
         this.reservationDescription = reservationDescription;
         this.rezervationDate = rezervationDate;
@@ -42,7 +44,7 @@ public class Reservation {
         this.desks = desks;
     }
 
-    public Reservation(String reservationDescription, String rezervationDate, String reservationNumberOfPeople, Restaurant restaurant, Customer customer, Set<Desk> desks) {
+    public Reservation(String reservationDescription, LocalDate rezervationDate, int reservationNumberOfPeople, Restaurant restaurant, Customer customer, Set<Desk> desks) {
         this.reservationDescription = reservationDescription;
         this.rezervationDate = rezervationDate;
         this.reservationNumberOfPeople = reservationNumberOfPeople;

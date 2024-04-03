@@ -22,4 +22,5 @@ public class Restaurant {
 
     @OneToMany(mappedBy = "restaurant",fetch = FetchType.LAZY)
     private Set<Reservation> reservations;
+    private int capacity;
 }

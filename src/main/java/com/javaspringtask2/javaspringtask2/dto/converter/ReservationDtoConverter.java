@@ -23,8 +23,8 @@ public class ReservationDtoConverter {
                 .builder()
                 .reservationId(from.getReservationId())
                 .reservationDescription(from.getReservationDescription())
-                .rezervationDate(from.getRezervationDate())
-                .reservationNumberOfPeople(from.getReservationNumberOfPeople())
+                .rezervationDate(from.getRezervationDate().toString())
+                .reservationNumberOfPeople(from.getReservationNumberOfPeople()+"")
                 .restaurant(converter.convert(from.getRestaurant()))
                 .customer(customerDtoConverter.convert(from.getCustomer()))
                 .build();

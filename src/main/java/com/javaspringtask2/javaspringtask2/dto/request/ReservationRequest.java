@@ -1,7 +1,9 @@
-package com.javaspringtask2.javaspringtask2.dto;
+package com.javaspringtask2.javaspringtask2.dto.request;
 
 import lombok.Builder;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -15,6 +17,6 @@ public class ReservationRequest {
     private boolean confirm;
     private String reservationDescription;
     private String rezervationDate;
-    private String reservationNumberOfPeople;
+    private int reservationNumberOfPeople;
 
 }

@@ -1,8 +1,7 @@
 package com.javaspringtask2.javaspringtask2.controller;
 
 import com.javaspringtask2.javaspringtask2.dto.ReservationDto;
-import com.javaspringtask2.javaspringtask2.dto.ReservationRequest;
-import com.javaspringtask2.javaspringtask2.model.Customer;
+import com.javaspringtask2.javaspringtask2.dto.request.ReservationRequest;
 import com.javaspringtask2.javaspringtask2.service.ReservationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +25,7 @@ public class ReservationController {
     public ResponseEntity<List<ReservationDto>> getAllReservations(){
         return ResponseEntity.ok(reservationService.getAllReservartions());
     }
-    @GetMapping("/revervations/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<List<ReservationDto>> getAllReservations(@PathVariable String id){
         return ResponseEntity.ok(reservationService.getReservationByRestaurant(id));
     }

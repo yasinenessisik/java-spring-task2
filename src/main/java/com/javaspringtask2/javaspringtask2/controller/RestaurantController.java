@@ -20,12 +20,12 @@ public class RestaurantController {
     }
 
     @GetMapping
-    public List<RestaurantDto> getAllRestaurant(){
-        return restaurantService.getAllRestaurants();
+    public ResponseEntity<List<RestaurantDto>> getAllRestaurant(){
+        return ResponseEntity.ok(restaurantService.getAllRestaurants());
     }
     @GetMapping("/{id}")
-    public RestaurantDto getReastaurant(@PathVariable String id){
-        return restaurantService.getRestaurant(id);
+    public ResponseEntity<RestaurantDto> getReastaurant(@PathVariable String id){
+        return ResponseEntity.ok(restaurantService.getRestaurant(id));
     }
 
 }
