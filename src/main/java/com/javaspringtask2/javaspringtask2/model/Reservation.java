@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -31,5 +32,13 @@ public class Reservation {
     @OneToMany(mappedBy = "reservation",fetch = FetchType.LAZY)
     private Set<Desk> desks;
 
-
+    public Reservation(String reservationId, String reservationDescription, String rezervationDate, String reservationNumberOfPeople, Restaurant restaurant, Customer customer, Set<Desk> desks) {
+        this.reservationId = reservationId;
+        this.reservationDescription = reservationDescription;
+        this.rezervationDate = rezervationDate;
+        this.reservationNumberOfPeople = reservationNumberOfPeople;
+        this.restaurant = restaurant;
+        this.customer = customer;
+        this.desks = desks;
+    }
 }

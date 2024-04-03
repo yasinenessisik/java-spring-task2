@@ -12,8 +12,8 @@ public class ReservationRestaurantDtoConverter {
                 .restaurantId(from.getRestaurantId())
                 .city(from.getCity())
                 .state(from.getState())
-                .altitude(from.getAltitude())
-                .longitude(from.getLongitude())
+                .altitude(String.valueOf(from.getAltitude()))
+                .longitude(String.valueOf(from.getLongitude()))
                 .restaurantType(from.getRestaurantType())
                 .build();
     }

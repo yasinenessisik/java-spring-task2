@@ -15,8 +15,8 @@ public class Restaurant {
 
     private String city;
     private String state;
-    private String altitude;
-    private String longitude;
+    private double altitude;
+    private double longitude;
     @Enumerated(value = EnumType.STRING)
     private RestaurantType restaurantType;
 

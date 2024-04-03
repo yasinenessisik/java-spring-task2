@@ -22,5 +22,4 @@ public class RestaurantDto {
     private String altitude;
     private String longitude;
     private RestaurantType restaurantType;
-    private Set<ReservationDto> reservations;
 }

@@ -1,11 +1,13 @@
 package com.javaspringtask2.javaspringtask2.model;
 
 import jakarta.persistence.*;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Set;
 
 @Entity
+@ToString
 public class Customer {
     @Id
     @GeneratedValue(generator = "UUID")
@@ -21,6 +23,20 @@ public class Customer {
     private boolean confirm;
     @OneToMany(mappedBy = "customer")
     private Set<Reservation> reservations;
+
+    public Customer(String name, String surname, String phoneNumber, String secondPhoneNumber, boolean kvkk, boolean confirm) {
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
+        this.secondPhoneNumber = secondPhoneNumber;
+        this.kvkk = kvkk;
+        this.confirm = confirm;
+        this.reservations = reservations;
+    }
+
+    public Customer() {
+
+    }
 
     public String getCustomerId() {
         return customerId;
