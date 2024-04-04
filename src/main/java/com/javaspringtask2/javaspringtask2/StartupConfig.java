@@ -24,6 +24,7 @@ public class StartupConfig implements CommandLineRunner {
         restaurant1.setAltitude(37.8716); // Konya'nın enlem bilgisi
         restaurant1.setLongitude(32.4860); // Konya'nın boylam bilgisi
         restaurant1.setRestaurantType(RestaurantType.DONER);
+        restaurant1.setCapacity(300);
         restaurantRepository.save(restaurant1);
 
         // İstanbul Kartal'da bir restoran oluştur
@@ -34,6 +35,7 @@ public class StartupConfig implements CommandLineRunner {
         restaurant2.setAltitude(40.8932); // İstanbul Kartal'ın enlem bilgisi
         restaurant2.setLongitude(29.2163); // İstanbul Kartal'ın boylam bilgisi
         restaurant2.setRestaurantType(RestaurantType.KOFTE);
+        restaurant2.setCapacity(500);
         restaurantRepository.save(restaurant2);
 
         Restaurant customer = restaurantRepository.save(restaurant1);

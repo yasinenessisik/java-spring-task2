@@ -40,7 +40,7 @@ public class ReservationService {
 
         Restaurant restaurant = restaurantService.findRestaurants(from.getRestaurantId());
         checkReservationDate(dateFormatter(from.getRezervationDate()));
-
+        checkCapacity(from.getRezervationDate(),restaurant.getCapacity(),from.getRezervationDate());
 
 
         Customer customer = new Customer();
@@ -84,14 +84,16 @@ public class ReservationService {
             );
         }
     }
-    private void checkCapacity(int from){
-                 throw new CapacityFullException("Restoranın kapasitesi dolu.");
-        }
-
-    private LocalDate dateFormatter(String dateString){
-        return LocalDate.parse(dateString);
+    private void checkCapacity(String reservationDate, int restaurantCapacity, String restaurantId) {
+        int restaurantCurrentCapacity = reservationRepository.getReservationCapacityWithDate(restaurantId, dateFormatter(reservationDate));
+        if (restaurantCurrentCapacity > restaurantCapacity)
+            throw new CapacityFullException("Restoranın kapasitesi dolu.");
     }
 
+    private LocalDate dateFormatter(String dateString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+        return LocalDate.parse(dateString, formatter);
+    }
 }
 
 
