@@ -72,7 +72,7 @@ public class ReservationService {
     }
 
     public List<ReservationDto> getReservationByRestaurant(String id) {
-        return reservationRepository.getReservationByReservationId(id).stream().map(reservation -> reservationDtoConverter.conver(reservation)).collect(Collectors.toList());
+        return reservationRepository.getReservationByRestaurantnId(id).stream().map(reservation -> reservationDtoConverter.conver(reservation)).collect(Collectors.toList());
     }
 
     private void checkReservationDate(LocalDate reservationDate) {

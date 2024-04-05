@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface ReservationRepository extends JpaRepository<Reservation,String> {
     @Query("SELECT r FROM Reservation r WHERE r.restaurant.restaurantId = :id")
-    public List<Reservation> getReservationByReservationId(@Param("id") String id);
+    public List<Reservation> getReservationByRestaurantnId(@Param("id") String id);
 
     @Query("SELECT SUM(r.reservationNumberOfPeople) from Reservation r where r.restaurant.restaurantId =:id and r.rezervationDate =:date")
     public Integer getReservationCapacityWithDate(String id, LocalDate date);
