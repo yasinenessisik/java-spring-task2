@@ -20,7 +20,7 @@ public class ReservationRequest {
     private boolean kvkk;
     private boolean confirm;
     private String reservationDescription;
-    private String rezervationDate;
+    private String reservationDate;
     private int reservationNumberOfPeople;
 
 }

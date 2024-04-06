@@ -44,7 +44,6 @@ public class ReservationServiceTest {
         ReservationRequest request = new ReservationRequest();
         request.setRestaurantId("1");
         request.setReservationDescription("Test reservation");
-        request.setRezervationDate("2024-04-10");
         request.setReservationNumberOfPeople(4);
         request.setName("Enes");
         request.setSurname("Sisik");

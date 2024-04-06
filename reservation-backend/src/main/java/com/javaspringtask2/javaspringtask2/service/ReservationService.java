@@ -38,8 +38,8 @@ public class ReservationService {
     public ReservationDto reserve(ReservationRequest from) {
 
         Restaurant restaurant = restaurantService.findRestaurants(from.getRestaurantId());
-        checkReservationDate(dateFormatter(from.getRezervationDate()));
-        checkCapacity(from.getRezervationDate(), restaurant.getCapacity(), String.valueOf(restaurant.getRestaurantId()));
+        checkReservationDate(dateFormatter(from.getReservationDate()));
+        checkCapacity(from.getReservationDate(), restaurant.getCapacity(), String.valueOf(restaurant.getRestaurantId()));
 
 
         Customer customer = new Customer();
@@ -53,7 +53,7 @@ public class ReservationService {
 
         Reservation reservation = new Reservation(// reservationId
                 from.getReservationDescription(), // reservationDescription
-                dateFormatter(from.getRezervationDate()), // rezervationDate
+                dateFormatter(from.getReservationDate()), // rezervationDate
                 from.getReservationNumberOfPeople(), // reservationNumberOfPeople
                 restaurant, // restaurant
                 newCustomer, // customer
@@ -89,6 +89,10 @@ public class ReservationService {
     }
 
     private LocalDate dateFormatter(String dateString) {
+        if (dateString == null) {
+            // dateString null ise varsayılan bir değer döndürebilir veya istisna fırlatabilirsiniz
+            throw new IllegalArgumentException("Date string cannot be null");
+        }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.parse(dateString, formatter);
     }
