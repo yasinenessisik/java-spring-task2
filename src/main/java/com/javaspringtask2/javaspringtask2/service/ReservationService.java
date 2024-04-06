@@ -1,8 +1,8 @@
 package com.javaspringtask2.javaspringtask2.service;
 
 import com.javaspringtask2.javaspringtask2.dto.ReservationDto;
-import com.javaspringtask2.javaspringtask2.dto.request.ReservationRequest;
 import com.javaspringtask2.javaspringtask2.dto.converter.ReservationDtoConverter;
+import com.javaspringtask2.javaspringtask2.dto.request.ReservationRequest;
 import com.javaspringtask2.javaspringtask2.exception.CapacityFullException;
 import com.javaspringtask2.javaspringtask2.exception.ErrorCode;
 import com.javaspringtask2.javaspringtask2.exception.GenericExceptionHandler;
@@ -14,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
@@ -40,7 +39,7 @@ public class ReservationService {
 
         Restaurant restaurant = restaurantService.findRestaurants(from.getRestaurantId());
         checkReservationDate(dateFormatter(from.getRezervationDate()));
-        checkCapacity(from.getRezervationDate(),restaurant.getCapacity(), String.valueOf(restaurant.getRestaurantId()));
+        checkCapacity(from.getRezervationDate(), restaurant.getCapacity(), String.valueOf(restaurant.getRestaurantId()));
 
 
         Customer customer = new Customer();
@@ -52,8 +51,6 @@ public class ReservationService {
 
         Customer newCustomer = customerService.saveCustomer(customer);
 
-        System.out.println(customer.toString());
-        System.out.println(newCustomer.toString());
         Reservation reservation = new Reservation(// reservationId
                 from.getReservationDescription(), // reservationDescription
                 dateFormatter(from.getRezervationDate()), // rezervationDate
@@ -77,13 +74,10 @@ public class ReservationService {
 
     private void checkReservationDate(LocalDate reservationDate) {
         if (reservationDate.isBefore(LocalDate.now())) {
-            throw new GenericExceptionHandler(
-                    HttpStatus.BAD_REQUEST,
-                    ErrorCode.DATE_NOT_VALID,
-                    "Rezervasyon tarihi bugünden önce olamaz."
-            );
+            throw new GenericExceptionHandler(HttpStatus.BAD_REQUEST, ErrorCode.DATE_NOT_VALID, "Rezervasyon tarihi bugünden önce olamaz.");
         }
     }
+
     private void checkCapacity(String reservationDate, int restaurantCapacity, String restaurantId) {
         Integer restaurantCurrentCapacity = reservationRepository.getReservationCapacityWithDate(restaurantId, dateFormatter(reservationDate));
         if (restaurantCurrentCapacity == null) {

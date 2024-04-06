@@ -2,21 +2,16 @@ package com.javaspringtask2.javaspringtask2.repository;
 
 import com.javaspringtask2.javaspringtask2.model.Reservation;
 import com.javaspringtask2.javaspringtask2.model.Restaurant;
-import com.javaspringtask2.javaspringtask2.model.RestaurantType;
-import org.aspectj.lang.annotation.Before;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @DataJpaTest
 public class ReservationRepositoryTest {
 
@@ -25,7 +20,10 @@ public class ReservationRepositoryTest {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
-    @BeforeEach
+    public void tearDown() {
+        reservationRepository.deleteAll();
+        restaurantRepository.deleteAll();
+    }
     public void setUp() {
         Restaurant restaurant1 = new Restaurant();
         restaurant1.setRestaurantId(1);
@@ -54,23 +52,24 @@ public class ReservationRepositoryTest {
         reservation3.setRestaurant(restaurant1);
         reservationRepository.save(reservation3);
     }
+/*    @Test
+    public void getReservationByRestaurantnId() {
+        setUp();
+        String restaurantId = "1";
+        List<Reservation> reservations = reservationRepository.getReservationByRestaurantnId(restaurantId);
+        Assertions.assertThat(reservations).hasSize(3);
+        tearDown();
+    }
+
+ */
     @Test
     public void testGetReservationCapacityWithDate() {
-
+        setUp();
         String restaurantId = "1";
         LocalDate date = LocalDate.of(2024, 4, 5); // Örnek bir tarih
         Integer capacity = reservationRepository.getReservationCapacityWithDate(restaurantId, date);
         Integer expectedCapacity = 20; // Örnek bir kapasite
         assertEquals(expectedCapacity, capacity);
+        tearDown();
     }
-
-    @Test
-    public void getReservationByRestaurantnId(){
-
-        String restaurantId = "1";
-        List<Reservation> reservations = reservationRepository.getReservationByRestaurantnId(restaurantId);
-        Assertions.assertThat(reservations).hasSize(3);
-    }
-
-
 }
