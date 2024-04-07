@@ -44,3 +44,7 @@ The task involves developing an API for managing restaurant reservations. Users 
 ### Conclusion:
 
 This task aims to develop a robust API for managing restaurant reservations, ensuring proper software engineering practices are followed. By meeting the requirements and bonuses, the goal is to deliver a functional system that enhances the reservation experience for both customers and restaurant owners.
+
+![](https://github.com/java-spring-task2-reservationSystem
+/task2.gif)
+
