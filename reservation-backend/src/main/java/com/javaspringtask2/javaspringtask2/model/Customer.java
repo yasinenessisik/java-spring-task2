@@ -13,7 +13,7 @@ public class Customer {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID",strategy = "org.hibernate.id.UUIDGenerator")
     private String customerId;
-
+    private String email;
     private String name;
     private String surname;
     private String phoneNumber;

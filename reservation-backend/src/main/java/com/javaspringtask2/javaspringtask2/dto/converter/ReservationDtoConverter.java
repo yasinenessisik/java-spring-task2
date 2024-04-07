@@ -27,6 +27,7 @@ public class ReservationDtoConverter {
                 .reservationNumberOfPeople(from.getReservationNumberOfPeople()+"")
                 .restaurant(converter.convert(from.getRestaurant()))
                 .customer(customerDtoConverter.convert(from.getCustomer()))
+                .confirmed(from.getConfirmed())
                 .build();
     }
 }

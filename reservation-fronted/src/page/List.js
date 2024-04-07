@@ -30,6 +30,7 @@ const List = () => {
                     <th>Customer Surname</th>
                     <th>Customer Phone Number</th>
                     <th>Number of People</th>
+                    <th>Confirm Status</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,6 +42,7 @@ const List = () => {
                         <td>{reservation.customer.surname}</td>
                         <th>{reservation.customer.phoneNumber}</th>
                         <td>{reservation.reservationNumberOfPeople}</td>
+                        <td>{reservation.confirmed ? 'Confirmed' : 'Not Confirmed'}</td>
                     </tr>
                 ))}
                 </tbody>

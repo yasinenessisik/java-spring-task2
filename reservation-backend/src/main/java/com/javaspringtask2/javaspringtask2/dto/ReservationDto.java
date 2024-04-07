@@ -25,6 +25,6 @@ public class ReservationDto {
     private ReservationRestaurantDto restaurant;
 
     private CustomerDto customer;
-
+    private Boolean confirmed;
     private Set<DeskDto> desks;
 }

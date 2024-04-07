@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 const ListByRestaurantId = () => {
     const [reservations, setReservations] = useState([]);
     const { restaurantId } = useParams();
-    const [restaurantInfo, setRestaurantInfo] = useState(null);
+    const [restaurantInfo, setRestaurantInfo] = useState([]);
     console.log(restaurantId);
     useEffect(() => {
         const fetchReservations = async () => {

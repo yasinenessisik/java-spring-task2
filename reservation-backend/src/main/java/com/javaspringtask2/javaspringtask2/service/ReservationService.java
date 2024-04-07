@@ -26,13 +26,15 @@ public class ReservationService {
     private final RestaurantService restaurantService;
     private final CustomerService customerService;
     private final ReservationDtoConverter reservationDtoConverter;
+    private final EmailSenderService emailSenderService;
 
 
-    public ReservationService(ReservationRepository reservationRepository, RestaurantService restaurantService, CustomerService customerService, ReservationDtoConverter reservationDtoConverter) {
+    public ReservationService(ReservationRepository reservationRepository, RestaurantService restaurantService, CustomerService customerService, ReservationDtoConverter reservationDtoConverter, EmailSenderService emailSenderService) {
         this.reservationRepository = reservationRepository;
         this.restaurantService = restaurantService;
         this.customerService = customerService;
         this.reservationDtoConverter = reservationDtoConverter;
+        this.emailSenderService = emailSenderService;
     }
 
 
@@ -58,10 +60,10 @@ public class ReservationService {
                 from.getReservationNumberOfPeople(), // reservationNumberOfPeople
                 restaurant, // restaurant
                 newCustomer, // customer
-                new HashSet<>() // desks
+                new HashSet<>()// desks
         );
-
         Reservation reservation1 = reservationRepository.save(reservation);
+        emailSenderService.sendConfirmationEmail(from.getEmail(),"Reservation Confirm Mail","", newCustomer.getCustomerId(), reservation1.getReservationId());
         return reservationDtoConverter.conver(reservation1);
     }
 

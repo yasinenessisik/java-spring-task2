@@ -10,6 +10,7 @@ import './App.css';
 import Add from "./page/Add";
 import List from "./page/List";
 import ListByRestaurantId from "./page/ListByRestaurantId";
+import ConfirmReservation from "./page/ConfirmReservation";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
                 <Route path="/add" element={<Add />} />
                 <Route path="/list" element={<List />} />
                 <Route path="/listbyrestaurant/:restaurantId" element={<ListByRestaurantId />} />
+                <Route path="/confirmreservation/:customerId/:reservationId" element={<ConfirmReservation />} />
             </Routes>
         </BrowserRouter>
     </div>

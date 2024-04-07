@@ -14,7 +14,8 @@ const Add = () => {
         confirm: false,
         reservationDescription: '',
         reservationDate: '',
-        reservationNumberOfPeople: ""
+        reservationNumberOfPeople: "",
+        email:""
     });
     const navigate = useNavigate();
     const handleChange = (e) => {
@@ -56,6 +57,13 @@ const Add = () => {
                 name="surname"
                 placeholder="Surname"
                 value={formData.surname}
+                onChange={handleChange}
+            />
+            <input
+                type="text"
+                name="email"
+                placeholder="email"
+                value={formData.email}
                 onChange={handleChange}
             />
             <input

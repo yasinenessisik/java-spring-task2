@@ -22,5 +22,6 @@ public class ReservationRequest {
     private String reservationDescription;
     private String reservationDate;
     private int reservationNumberOfPeople;
+    private String email;
 
 }

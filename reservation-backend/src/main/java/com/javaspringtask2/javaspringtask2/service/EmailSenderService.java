@@ -14,13 +14,13 @@ public class EmailSenderService {
     }
 
 
-    public void sendEmail(String email,String subject,String body){
+    public void sendConfirmationEmail(String email,String subject,String body,String customerId,String reservationId){
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("cercaslusaj@gmail.com");
         message.setTo(email);
-        message.setText(body);
+        message.setText(body + String.format("\n\nClick the following link to proceed: http://localhost:3000/confirmreservation/%s/%s",customerId,reservationId));
         message.setSubject(subject);
         javaMailSender.send(message);
-
+        System.out.println(message.getText().toString());
     }
 }
