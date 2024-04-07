@@ -3,6 +3,7 @@ package com.javaspringtask2.javaspringtask2.controller;
 import com.javaspringtask2.javaspringtask2.dto.ReservationDto;
 import com.javaspringtask2.javaspringtask2.dto.request.ReservationRequest;
 import com.javaspringtask2.javaspringtask2.repository.ReservationRepository;
+import com.javaspringtask2.javaspringtask2.service.EmailSenderService;
 import com.javaspringtask2.javaspringtask2.service.ReservationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +15,10 @@ import java.util.List;
 @RequestMapping("/v1/reservation")
 public class ReservationController {
     private final ReservationService reservationService;
-    public ReservationController(ReservationService reservationService) {
+    private final EmailSenderService emailSenderService;
+    public ReservationController(ReservationService reservationService, EmailSenderService emailSenderService) {
         this.reservationService = reservationService;
+        this.emailSenderService = emailSenderService;
     }
 
     @PostMapping("/reserve")
