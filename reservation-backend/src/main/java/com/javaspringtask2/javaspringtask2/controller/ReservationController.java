@@ -30,4 +30,9 @@ public class ReservationController {
     public ResponseEntity<List<ReservationDto>> getAllReservations(@PathVariable String restaurantId){
         return ResponseEntity.ok(reservationService.getReservationByRestaurant(restaurantId));
     }
+
+    @GetMapping("/{customerId}/{reservationId}")
+    public ResponseEntity<ResponseEntity> getAllReservations(@PathVariable String customerId,@PathVariable String reservationId){
+        return ResponseEntity.ok(reservationService.confirmReservation(customerId,reservationId));
+    }
 }

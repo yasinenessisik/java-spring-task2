@@ -34,6 +34,7 @@ public class Reservation {
     @OneToMany(mappedBy = "reservation",fetch = FetchType.LAZY)
     private Set<Desk> desks;
 
+    private Boolean confirmed;
     public Reservation(String reservationId, String reservationDescription, LocalDate rezervationDate, int reservationNumberOfPeople, Restaurant restaurant, Customer customer, Set<Desk> desks) {
         this.reservationId = reservationId;
         this.reservationDescription = reservationDescription;
@@ -42,6 +43,7 @@ public class Reservation {
         this.restaurant = restaurant;
         this.customer = customer;
         this.desks = desks;
+        this.confirmed = false;
     }
 
     public Reservation(String reservationDescription, LocalDate rezervationDate, int reservationNumberOfPeople, Restaurant restaurant, Customer customer, Set<Desk> desks) {
@@ -51,6 +53,7 @@ public class Reservation {
         this.restaurant = restaurant;
         this.customer = customer;
         this.desks = desks;
+        this.confirmed = false;
     }
 
     public Reservation() {

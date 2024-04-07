@@ -11,6 +11,7 @@ import com.javaspringtask2.javaspringtask2.model.Reservation;
 import com.javaspringtask2.javaspringtask2.model.Restaurant;
 import com.javaspringtask2.javaspringtask2.repository.ReservationRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -95,6 +96,15 @@ public class ReservationService {
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return LocalDate.parse(dateString, formatter);
+    }
+
+    public ResponseEntity<String> confirmReservation(String customerId, String reservationId) {
+        int updatedRowCount = reservationRepository.confirmReservation(reservationId, customerId);
+        if (updatedRowCount > 0) {
+            return ResponseEntity.ok("Reservation confirmed successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Reservation not found or update failed");
+        }
     }
 }
 
