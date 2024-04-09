@@ -2,6 +2,10 @@
 
 ## Task Description: Restaurant Reservation API
 
+# JPA
+# SMTP
+# OOP
+# LA
 
 ### Requirements:
 
